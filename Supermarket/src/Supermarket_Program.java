@@ -1,5 +1,7 @@
 import java.util.Locale;
 import java.util.Scanner;
+
+//commit test
 public class Supermarket_Program {
     // ประกาศแสกนเนอร์แล้ว สามารถใช้ได้เลยไม่ต้องประกาศใหม่
     public static Scanner sc = new Scanner(System.in);
