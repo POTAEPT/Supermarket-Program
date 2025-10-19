@@ -1,6 +1,4 @@
 import java.util.Scanner;
-
-//commit test
 public class Supermarket_Program {
     // ประกาศแสกนเนอร์แล้ว สามารถใช้ได้เลยไม่ต้องประกาศใหม่
     public static Scanner sc = new Scanner(System.in);
@@ -19,9 +17,9 @@ public class Supermarket_Program {
 
     //เมดธอน สำหรับเพิ่มข้อมูลผู้ใช้งาน (171)
     public static boolean  addUser(String username, String password, String role){
-       username = username.trim();
-       password = password.trim();
-       role = role.trim();
+        username = username.trim();
+        password = password.trim();
+        role = role.trim();
         if(username == null || password == null || role == null) return false;
 
         for (int i = 0; i<userCount; i++){
@@ -29,7 +27,7 @@ public class Supermarket_Program {
                 return false;
             }
         }
-        
+
         resizeArray();
         user[userCount][0] = username;
         user[userCount][1] = password;
@@ -38,23 +36,23 @@ public class Supermarket_Program {
         return true;
     }
 
-     public static void  loginSystem(){
-            System.out.println("========Login========");
-            System.out.print("Username: ");
-            String username = sc.nextLine();
-            System.out.print("Password:  ");
-            String password = sc.nextLine();
-            System.out.println("=====================");
+    public static void  loginSystem(){
+        System.out.println("========Login========");
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+        System.out.print("Password:  ");
+        String password = sc.nextLine();
+        System.out.println("=====================");
 
-            String role = checkLogin(user,userCount,username,password);
-            if(role.equals("admin")){
-                System.out.println("Login Successful");
-                adminMenu();
+        String role = checkLogin(user,userCount,username,password);
+        if(role.equals("admin")){
+            System.out.println("Login Successful");
+            adminMenu();
 
-            }else if (role.equals("cashier")){
-                cashierMenu();
-                System.out.println("Login Successful");
-            }else{System.out.println("!!!Login Failed!!!");}
+        }else if (role.equals("cashier")){
+            cashierMenu();
+            System.out.println("Login Successful");
+        }else{System.out.println("!!!Login Failed!!!");}
     }
 
 
@@ -139,7 +137,40 @@ public class Supermarket_Program {
         }
     }
 
+    // Method การคิดส่วนลดตามราคาที่กำหนดไว้ 189
+    public static double calculatePromotion(double total) {
+        double[] totalThreshold = {1000, 750, 500, 250};        // ขั้นต่ำแต่ละระดับ
+        double[] totalDiscountPercent = {0.20, 0.15, 0.10, 0.05}; // ส่วนลดแต่ละระดับ
 
+        double discount = 0;
+        for (int i = 0; i < totalThreshold.length; i++) {
+            if (total >= totalThreshold[i]) {
+                discount = total * totalDiscountPercent[i];
+                break;
+            }
+        }
+        if (discount > 0) {
+            System.out.println("You received a discount of " + discount + " Baht!");
+        }
+        return total - discount;
+    }
+
+    // Method แสดงใบเสร็จ รับชื่อสินค้า, ราคาต่อหน่วย, จำนวนที่ซื้อ, subtotal/total ก่อนลด, หลังลด 189
+    public static void printReceipt(String[] items, double[] prices, int[] qty, int itemCount, double total, double finalTotal) {
+        System.out.println("\n===== Receipt =====");
+        System.out.println("Item\tPrice\tQty\tSubtotal");
+        for (int i = 0; i < itemCount; i++) {
+            if(qty[i]>0)
+                System.out.println(items[i] + "\t" + prices[i] + "\t" + qty[i] + "\t" + (prices[i]*qty[i]));
+        }
+        System.out.println("------------------------");
+        System.out.printf("Total: %.2f\n", total);
+        if (finalTotal < total) {
+            System.out.printf("Discounted Total: %.2f\n", finalTotal);
+        }
+        System.out.println("========================");
+        System.out.println("Thank you!");
+    }
 
     public static void main(String[] args) {
         // User_Admin
