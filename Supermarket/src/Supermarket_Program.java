@@ -174,6 +174,53 @@ public class Supermarket_Program {
         System.out.println("Thank you!");
     }
 
+    
+
+    // เลือกสินค้าและจำนวน (คืนค่าเป็นตะกร้าแบบจำนวนต่อสินค้า)
+    static int[] selectItems(Scanner sc) {
+        int[] quantities = new int[products.length]; // เก็บจำนวนที่ลูกค้าซื้อของแต่ละตัว
+        System.out.println("สินค้าในร้าน:");
+        for (int i = 0; i < products.length; i++) {
+            System.out.println((i + 1) + ". " + products[i] + " - " + prices[i] + " บาท");
+        }
+
+        while (true) {
+            System.out.print("เลือกสินค้าตามหมายเลข (0 เพื่อจบ): ");
+            int choice = sc.nextInt();
+            if (choice == 0) break;
+            if (choice < 1 || choice > products.length) {
+                System.out.println("หมายเลขไม่ถูกต้อง ลองใหม่ครับ");
+                continue;
+            }
+            System.out.print("จำนวนที่ต้องการ: ");
+            int qty = sc.nextInt();
+            if (qty < 0) {
+                System.out.println("จำนวนต้องไม่ติดลบ");
+                continue;
+            }
+            quantities[choice - 1] += qty; // เพิ่มจำนวนที่ลค. ซื้อ
+        }
+        return quantities;
+    }
+
+    //  คำนวณราคารวม และแสดงบิล
+        static int calculateTotal(int[] quantities) {
+        int total = 0;
+        System.out.println(); 
+        System.out.println("รายการที่ซื้อ:");
+        for (int i = 0; i < products.length; i++) {
+            int qty = quantities[i];
+            if (qty > 0) {
+                int subtotal = prices[i] * qty;
+                System.out.println(products[i] + " x " + qty + " = " + subtotal + " บาท");
+                total += subtotal;
+            }
+        }
+        System.out.println("ราคารวมทั้งหมด: " + total + " บาท");
+        return total;
+    }
+
+
     public static void main(String[] args) {
         // User_Admin
         addUser("admin01","12345","admin");
@@ -183,4 +230,6 @@ public class Supermarket_Program {
             loginSystem();
         }
     }
+
+
 }
