@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 public class Supermarket_Program {
     // ประกาศแสกนเนอร์แล้ว สามารถใช้ได้เลยไม่ต้องประกาศใหม่
@@ -137,8 +138,6 @@ public class Supermarket_Program {
         }
     }
 
-
-
     public static void main(String[] args) {
         // User_Admin
         addUser("admin01","12345","admin");
@@ -147,5 +146,75 @@ public class Supermarket_Program {
         while (true){
             loginSystem();
         }
+    }
+    //เเมดธอน แสดงรายการสินค้า
+    public static void displayProducts(String[] names, double[] prices, double[] quantitiy) {
+        System.out.println("Product List:");
+        System.out.println();
+        for (int i = 0; i < names.length; i++) {
+            System.out.println("  Product numbers: " + (i+1));
+            System.out.println("  Name: " + names[i]);
+            System.out.println("  Price: " + prices[i] + " bath");
+            System.out.println("  Quantity: " + quantitiy[i]);
+            System.out.println();
+        }
+    }
+    //เมดธอน เพิ่มสินค้า
+    public static Object[] addProduct(String[] names, double[] prices, double[] quantity) {
+        int newSize = names.length + 1;
+        String[] updatedNames = Arrays.copyOf(names, names.length + 1);
+        double[] updatedPrices = Arrays.copyOf(prices, prices.length + 1);
+        double[] updatedQuantity = Arrays.copyOf(quantity, quantity.length + 1);
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter new product name: ");
+        updatedNames[newSize - 1] = input.nextLine();
+        System.out.print("Enter new product price(bath): ");
+        updatedPrices[newSize - 1] = input.nextDouble();
+        System.out.print("Enter new product quantity: ");
+        updatedQuantity[newSize - 1] = input.nextDouble();
+        return new Object[]{updatedNames, updatedPrices, updatedQuantity};
+    }
+    //เมดธอน ลบสินค้า
+    public static Object[] removeProduct(String[] names, double[] prices, double[] quantity) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the product number to remove: ");
+        int index = input.nextInt();
+        index--;
+        if (index < 0 || index >= names.length) {
+            System.out.println("Invalid product number.");
+            return new Object[]{names, prices, quantity};
+        }
+        String[] updatedNames = new String[names.length - 1];
+        double[] updatedPrices = new double[prices.length - 1];
+        double[] updatedQuantity = new double[quantity.length - 1];
+        for (int i = 0, j = 0; i < names.length;i++){
+            if(i == index){
+                continue;
+            }
+            updatedNames[j] = names[i];
+            updatedPrices[j] = prices[i];
+            updatedQuantity[j] = quantity[i];
+            j++;
+        }
+        return new Object[]{updatedNames, updatedPrices, updatedQuantity};
+    }
+    //เมดธอน แก้ไขสินค้า
+    public static Object[] UpdateProduct(String[] names, double[] prices, double[] quantity) {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter the product number to change: ");
+        int index = input.nextInt();
+        input.nextLine(); 
+        index--;
+        if (index < 0 || index >= names.length) {
+            System.out.println("Invalid product number.");
+            return new Object[]{names, prices, quantity};
+        }
+        System.out.print("Enter new product name: ");
+        names[index] = input.nextLine();
+        System.out.print("Enter new product price: ");
+        prices[index] = input.nextDouble();
+        System.out.print("Enter new product quantity: ");
+        quantity[index] = input.nextDouble();
+        return new Object[]{names, prices, quantity};
     }
 }
