@@ -130,7 +130,9 @@ public class Supermarket_Program {
                     break;
                 case "3":
                     //Logout
-                    return;
+                    System.err.println("Exit Program");
+                    System.out.println("=====================");
+                    return ;
                 default:
                     System.out.print("Unknown command Try again");
             }
