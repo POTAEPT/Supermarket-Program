@@ -1,4 +1,3 @@
-import java.util.Arrays;
 import java.util.Scanner;
 public class Supermarket_Program {
     // ประกาศแสกนเนอร์แล้ว สามารถใช้ได้เลยไม่ต้องประกาศใหม่
@@ -191,17 +190,28 @@ public class Supermarket_Program {
     }
     //เมดธอน เพิ่มสินค้า
     public static Object[] addProduct(String[] names, double[] prices, double[] quantity) {
-        int newSize = names.length + 1;
-        String[] updatedNames = Arrays.copyOf(names, names.length + 1);
-        double[] updatedPrices = Arrays.copyOf(prices, prices.length + 1);
-        double[] updatedQuantity = Arrays.copyOf(quantity, quantity.length + 1);
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter new product name: ");
-        updatedNames[newSize - 1] = input.nextLine();
-        System.out.print("Enter new product price(bath): ");
-        updatedPrices[newSize - 1] = input.nextDouble();
-        System.out.print("Enter new product quantity: ");
-        updatedQuantity[newSize - 1] = input.nextDouble();
+        System.out.print("Enter Number of product types: ");
+        int addCount = input.nextInt();
+        int newSize = names.length + addCount;
+        String[] updatedNames = new String[newSize];
+        double[] updatedPrices = new double[newSize];
+        double[] updatedQuantity = new double[newSize];
+        input.nextLine();
+        for (int i = 0; i < names.length; i++) {
+            updatedNames[i] = names[i];
+            updatedPrices[i] = prices[i];
+            updatedQuantity[i] = quantity[i];
+        }
+        for (int i = 0; i < addCount; i++) {
+            System.out.print("Enter product name: ");
+            updatedNames[names.length + i] = input.nextLine();
+            System.out.print("Enter product price: ");
+            updatedPrices[prices.length + i] = input.nextDouble();
+            System.out.print("Enter product quantity: ");
+            updatedQuantity[quantity.length + i] = input.nextDouble();
+            input.nextLine(); 
+        }
         return new Object[]{updatedNames, updatedPrices, updatedQuantity};
     }
     //เมดธอน ลบสินค้า
