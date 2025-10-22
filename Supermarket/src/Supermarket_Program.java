@@ -140,15 +140,43 @@ public class Supermarket_Program {
         }
     }
 
-    public static void main(String[] args) {
-        // User_Admin
-        addUser("admin01","12345","admin");
-        addUser("cashier01","12345","cashier");
 
-        while (true){
-            loginSystem();
+
+    // Method การคิดส่วนลดตามราคาที่กำหนดไว้ 189
+    public static double calculatePromotion(double total) {
+        double[] totalThreshold = {1000, 750, 500, 250};        // ขั้นต่ำแต่ละระดับ
+        double[] totalDiscountPercent = {0.20, 0.15, 0.10, 0.05}; // ส่วนลดแต่ละระดับ
+
+        double discount = 0;
+        for (int i = 0; i < totalThreshold.length; i++) {
+            if (total >= totalThreshold[i]) {
+                discount = total * totalDiscountPercent[i];
+                break;
+            }
         }
+        if (discount > 0) {
+            System.out.println("You received a discount of " + discount + " Baht!");
+        }
+        return total - discount;
     }
+
+    // Method แสดงใบเสร็จ รับชื่อสินค้า, ราคาต่อหน่วย, จำนวนที่ซื้อ, subtotal/total ก่อนลด, หลังลด 189
+    public static void printReceipt(String[] items, double[] prices, int[] qty, int itemCount, double total, double finalTotal) {
+        System.out.println("\n===== Receipt =====");
+        System.out.println("Item\tPrice\tQty\tSubtotal");
+        for (int i = 0; i < itemCount; i++) {
+            if(qty[i]>0)
+                System.out.println(items[i] + "\t" + prices[i] + "\t" + qty[i] + "\t" + (prices[i]*qty[i]));
+        }
+        System.out.println("------------------------");
+        System.out.printf("Total: %.2f\n", total);
+        if (finalTotal < total) {
+            System.out.printf("Discounted Total: %.2f\n", finalTotal);
+        }
+        System.out.println("========================");
+        System.out.println("Thank you!");
+    }
+
     //เเมดธอน แสดงรายการสินค้า
     public static void displayProducts(String[] names, double[] prices, double[] quantitiy) {
         System.out.println("Product List:");
@@ -218,5 +246,17 @@ public class Supermarket_Program {
         System.out.print("Enter new product quantity: ");
         quantity[index] = input.nextDouble();
         return new Object[]{names, prices, quantity};
+    }
+
+
+
+    public static void main(String[] args) {
+        // User_Admin
+        addUser("admin01","12345","admin");
+        addUser("cashier01","12345","cashier");
+
+        while (true){
+            loginSystem();
+        }
     }
 }
