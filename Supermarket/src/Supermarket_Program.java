@@ -360,19 +360,33 @@ public class Supermarket_Program {
         }
     }
 
-    public static void addProduct(Scanner sc) {
-        resizeProductArray();
+   public static void addProduct(Scanner sc) {
+        System.out.print("Enter Number of product types to add: ");
+        int addCount = sc.nextInt(); 
+        sc.nextLine(); 
 
-        System.out.print("Enter new product name: ");
-        productNames[productCount] = sc.nextLine();
-        System.out.print("Enter new product price(bath): ");
-        productPrices[productCount] = sc.nextDouble();
-        System.out.print("Enter new product quantity: ");
-        productQuantities[productCount] = sc.nextDouble();
-        sc.nextLine();
+        for (int i = 0; i < addCount; i++) {
+            System.out.println("--- Adding Product " + (i + 1) + "/" + addCount + " ---");
+            
+          
+            resizeProductArray(); 
 
-        productCount++;
-        System.out.println("Add Product Successful");
+            
+            System.out.print("Enter new product name: ");
+            productNames[productCount] = sc.nextLine();
+            
+            System.out.print("Enter new product price(bath): ");
+            productPrices[productCount] = sc.nextDouble();
+            
+            System.out.print("Enter new product quantity: ");
+            productQuantities[productCount] = sc.nextDouble();
+            sc.nextLine(); 
+
+         
+            productCount++;
+            System.out.println("Add Product Successful (" + productNames[productCount - 1] + ")");
+        }
+        System.out.println("Finished adding " + addCount + " products.");
     }
 
     public static void removeProduct(Scanner sc) {
