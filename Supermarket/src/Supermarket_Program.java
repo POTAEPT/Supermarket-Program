@@ -18,9 +18,9 @@ public class Supermarket_Program {
 
     //เมดธอน สำหรับเพิ่มข้อมูลผู้ใช้งาน (171)
     public static boolean  addUser(String username, String password, String role){
-       username = username.trim();
-       password = password.trim();
-       role = role.trim();
+        username = username.trim();
+        password = password.trim();
+        role = role.trim();
         if(username == null || password == null || role == null) return false;
 
         for (int i = 0; i<userCount; i++){
@@ -28,7 +28,7 @@ public class Supermarket_Program {
                 return false;
             }
         }
-        
+
         resizeArray();
         user[userCount][0] = username;
         user[userCount][1] = password;
@@ -37,23 +37,23 @@ public class Supermarket_Program {
         return true;
     }
 
-     public static void  loginSystem(){
-            System.out.println("========Login========");
-            System.out.print("Username: ");
-            String username = sc.nextLine();
-            System.out.print("Password:  ");
-            String password = sc.nextLine();
-            System.out.println("=====================");
+    public static void  loginSystem(){
+        System.out.println("========Login========");
+        System.out.print("Username: ");
+        String username = sc.nextLine();
+        System.out.print("Password:  ");
+        String password = sc.nextLine();
+        System.out.println("=====================");
 
-            String role = checkLogin(user,userCount,username,password);
-            if(role.equals("admin")){
-                System.out.println("Login Successful");
-                adminMenu();
+        String role = checkLogin(user,userCount,username,password);
+        if(role.equals("admin")){
+            System.out.println("Login Successful");
+            adminMenu();
 
-            }else if (role.equals("cashier")){
-                cashierMenu();
-                System.out.println("Login Successful");
-            }else{System.out.println("!!!Login Failed!!!");}
+        }else if (role.equals("cashier")){
+            cashierMenu();
+            System.out.println("Login Successful");
+        }else{System.out.println("!!!Login Failed!!!");}
     }
 
 
@@ -131,7 +131,9 @@ public class Supermarket_Program {
                     break;
                 case "3":
                     //Logout
-                    return;
+                    System.err.println("Exit Program");
+                    System.out.println("=====================");
+                    return ;
                 default:
                     System.out.print("Unknown command Try again");
             }
