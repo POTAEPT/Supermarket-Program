@@ -3,9 +3,9 @@ Java-Projectgroup
 
 รายการฟังก์ชัน (Methods) ทั้งหมด
 1. Main Method
-main(String[] args)
+   main(String[] args)
 
-2. Core System (ระบบหลัก)
+3. Core System (ระบบหลัก)
 loginSystem(Scanner sc): แสดงหน้า Login และรับ Username/Password
 
 checkLogin(...): ตรวจสอบว่า Username/Password ถูกต้องหรือไม่ และคืนค่า Role (admin/cashier)
