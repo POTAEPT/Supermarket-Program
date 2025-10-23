@@ -9,14 +9,15 @@ public class Supermarket_Program {
     private static String[] productNames = { "Milk", "Eggs", "Bread" };
     private static double[] productPrices = { 45.0, 30.0, 55.0 };
     private static double[] productQuantities = { 100.0, 150.0, 200.0 };
+    private static double[] productTotalSoldQty = { 0.0, 0.0, 0.0 };
+    private static double[] productTotalRevenue = { 0.0, 0.0, 0.0 };
     private static int productCount = 3;
 
     // 2. Main Method
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        // User_Admin
-        // addUser("admin01","12345","admin");
-        // addUser("cashier01","12345","cashier");
+         addUser("admin01","12345","admin");
+         addUser("cashier01","12345","cashier");
 
         while (true) {
             loginSystem(sc);
@@ -80,7 +81,7 @@ public class Supermarket_Program {
                     managementProductMenu(sc);
                     break;
                 case "3":
-                    // Sales Report Method
+                    salesReport();
                     break;
                 case "4":
                     userManagement(sc);
@@ -111,7 +112,7 @@ public class Supermarket_Program {
                     sellProductProcess(sc);
                     break;
                 case "2":
-                    // Sales Report Method
+                    salesReport();
                     break;
                 case "3":
                     System.out.println("Logout Successful");
@@ -404,6 +405,8 @@ public class Supermarket_Program {
             productNames[i] = productNames[i + 1];
             productPrices[i] = productPrices[i + 1];
             productQuantities[i] = productQuantities[i + 1];
+            productTotalSoldQty[i] = productTotalSoldQty[i + 1];
+            productTotalRevenue[i] = productTotalRevenue[i + 1];
         }
 
         productCount--;
@@ -439,16 +442,22 @@ public class Supermarket_Program {
         String[] newNames = new String[newSize];
         double[] newPrices = new double[newSize];
         double[] newQuantities = new double[newSize];
+        double[] newTotalSoldQty = new double[newSize];
+        double[] newTotalRevenue = new double[newSize];
 
         for (int i = 0; i < productNames.length; i++) {
             newNames[i] = productNames[i];
             newPrices[i] = productPrices[i];
             newQuantities[i] = productQuantities[i];
+            newTotalSoldQty[i] = productTotalSoldQty[i];
+            newTotalRevenue[i] = productTotalRevenue[i];
         }
 
         productNames = newNames;
         productPrices = newPrices;
         productQuantities = newQuantities;
+        productTotalSoldQty = newTotalSoldQty;
+        productTotalRevenue = newTotalRevenue;
     }
 
     // 7. Sales/Checkout Methods
@@ -460,6 +469,17 @@ public class Supermarket_Program {
         double finalTotal = calculatePromotion(total);
 
         printReceipt(quantities, total, finalTotal);
+        for(int i = 0; i < productCount; i++) {
+            if (quantities[i] > 0) {
+
+                // 1. ลดสต็อกสินค้า
+                productQuantities[i] -= quantities[i];
+
+                // 2. บันทึกข้อมูลการขาย
+                productTotalSoldQty[i] += quantities[i];
+                productTotalRevenue[i] += (productPrices[i] * quantities[i]);
+            }
+        }
 
         System.out.println("==========");
     }
@@ -541,6 +561,38 @@ public class Supermarket_Program {
         }
         System.out.println("========================");
         System.out.println("Thank you!");
+    }
+
+
+    // --- นี่คือเมธอดใหม่สำหรับ Sales Report ---
+    public static void salesReport() {
+        System.out.println("===== Sales Report =====");
+        System.out.println("-----------------------------------------------------");
+        System.out.printf("%-20s | %-10s | %-15s\n", "Product Name", "Qty Sold", "Total Revenue");
+        System.out.println("-----------------------------------------------------");
+
+        double grandTotalRevenue = 0.0;
+        double grandTotalItems = 0.0;
+
+        for (int i = 0; i < productCount; i++) {
+            // แสดงเฉพาะสินค้าที่เคยขายได้
+            if (productTotalSoldQty[i] > 0) {
+                System.out.printf("%-20s | %-10.0f | %-15.2f\n",
+                        productNames[i],
+                        productTotalSoldQty[i],
+                        productTotalRevenue[i]);
+
+                grandTotalRevenue += productTotalRevenue[i];
+                grandTotalItems += productTotalSoldQty[i];
+            }
+        }
+
+        System.out.println("-----------------------------------------------------");
+        System.out.printf("%-20s | %-10.0f | %-15.2f\n",
+                "GRAND TOTAL",
+                grandTotalItems,
+                grandTotalRevenue);
+        System.out.println("==========================");
     }
 
 }
