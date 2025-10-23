@@ -9,15 +9,16 @@ public class Supermarket_Program {
     private static String[] productNames = { "Milk", "Eggs", "Bread" };
     private static double[] productPrices = { 45.0, 30.0, 55.0 };
     private static double[] productQuantities = { 100.0, 150.0, 200.0 };
-    private static double[] productTotalSoldQty = { 0.0, 0.0, 0.0 };
     private static double[] productTotalRevenue = { 0.0, 0.0, 0.0 };
+    // 1) ensure productTotalSoldQty is int[]
+    private static int[] productTotalSoldQty = new int[10];
     private static int productCount = 3;
 
     // 2. Main Method
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-         addUser("admin01","12345","admin");
-         addUser("cashier01","12345","cashier");
+         addUser("admin","12345","admin");
+         addUser("cashier","12345","cashier");
 
         while (true) {
             loginSystem(sc);
@@ -26,16 +27,17 @@ public class Supermarket_Program {
 
     // 3. Core System Methods
     public static void loginSystem(Scanner sc) {
-        System.out.println("========Login========");
+        System.out.println("======== Login ========");
         System.out.print("Username: ");
         String username = sc.nextLine();
         System.out.print("Password:  ");
         String password = sc.nextLine();
-        System.out.println("=====================");
+        System.out.println("=======================");
 
         String role = checkLogin(user, userCount, username, password);
         if (role.equals("admin")) {
             System.out.println("Login Successful");
+            System.out.println("======================= \n");
             adminMenu(sc);
 
         } else if (role.equals("cashier")) {
@@ -62,7 +64,7 @@ public class Supermarket_Program {
     // 4. Menu Methods
     public static void adminMenu(Scanner sc) {
         while (true) {
-            System.out.println("=====Supermarket Program for Admin=====");
+            System.out.println("===== Supermarket Program for Admin =====");
             System.out.print("""
                     1. Sell Product
                     2. Product Management
@@ -70,63 +72,69 @@ public class Supermarket_Program {
                     4. User Management
                     5. Logout
                     """);
-            System.out.println("=======================================");
+            System.out.println("=========================================");
             System.out.print("Enter your choice: ");
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
+                    System.out.println(" ");
                     sellProductProcess(sc);
                     break;
                 case "2":
+                    System.out.println(" ");
                     managementProductMenu(sc);
                     break;
                 case "3":
+                    System.out.println(" ");
                     salesReport();
                     break;
                 case "4":
+                    System.out.println(" ");
                     userManagement(sc);
                     break;
                 case "5":
                     System.err.println("Logout Successful");
-                    System.out.println("=====================");
+                    System.out.println("===================== \n");
                     return;
                 default:
-                    System.out.print("Unknown command Try again");
+                    System.out.print("Unknown command Try again \n");
             }
         }
     }
 
     public static void cashierMenu(Scanner sc) {
         while (true) {
-            System.out.println("=====Supermarket Program for Cashier=====");
+            System.out.println("===== Supermarket Program for Cashier =====");
             System.out.print("""
                     1. Sell Product
                     2. Sales Report
                     3. Logout
                     """);
-            System.out.println("=========================================");
+            System.out.println("===========================================");
             System.out.print("Enter your choice: ");
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
+                    System.out.println(" ");
                     sellProductProcess(sc);
                     break;
                 case "2":
+                    System.out.println(" ");
                     salesReport();
                     break;
                 case "3":
                     System.out.println("Logout Successful");
-                    System.out.println("=====================");
+                    System.out.println("===================== \n");
                     return;
                 default:
-                    System.out.print("Unknown command Try again");
+                    System.out.print("Unknown command Try again \n");
             }
         }
     }
 
     public static void userManagement(Scanner sc) {
         while (true) {
-            System.out.println("=====Management User=====");
+            System.out.println("===== Management User =====");
             System.out.println("""
                     1. Display all User
                     2. Add User
@@ -139,21 +147,26 @@ public class Supermarket_Program {
 
             switch (choice) {
                 case "1":
+                    System.out.println(" ");
                     displayUser();
                     break;
                 case "2":
+                    System.out.println(" ");
                     register(sc);
                     break;
                 case "3":
+                    System.out.println(" ");
                     updateUser(sc);
                     break;
                 case "4":
+                    System.out.println(" ");
                     deleteUser(sc);
                     break;
                 case "5":
+                    System.out.println(" ");
                     return;
                 default:
-                    System.out.println("Invalid choice. Try again.");
+                    System.out.println("Invalid choice. Try again. \n");
                     break;
             }
         }
@@ -161,7 +174,7 @@ public class Supermarket_Program {
 
     public static void managementProductMenu(Scanner sc) {
         while (true) {
-            System.out.println("=====Products Management=====");
+            System.out.println("===== Products Management =====");
             System.out.print("""
                     1. Display ALL Product in stock
                     2. Add Products
@@ -169,33 +182,39 @@ public class Supermarket_Program {
                     4. Remove Products
                     5. Back To Admin Menu
                     """);
-            System.out.println("=============================");
+            System.out.println("===============================");
             System.out.print("Enter your choice: ");
             String choice = sc.nextLine();
             switch (choice) {
                 case "1":
+                    System.out.println(" ");
                     displayProducts();
                     break;
                 case "2":
+                    System.out.println(" ");
                     addProduct(sc);
                     break;
                 case "3":
+                    System.out.println(" ");
                     updateProduct(sc);
                     break;
                 case "4":
+                    System.out.println(" ");
                     removeProduct(sc);
                     break;
                 case "5":
+                    System.out.println(" ");
                     return;
                 default:
-                    throw new AssertionError();
+                    System.out.println("Invalid choice. Try again. \n");
+                    break;
             }
         }
     }
 
     // 5. User Management Methods
     public static void displayUser() {
-        System.out.println("=====User List=====");
+        System.out.println("===== User List =====");
         for (int i = 0; i < userCount; i++) {
             System.out.println("No " + (i + 1) + " Username :" + user[i][0] + " Role :" + user[i][2]);
         }
@@ -442,8 +461,8 @@ public class Supermarket_Program {
         String[] newNames = new String[newSize];
         double[] newPrices = new double[newSize];
         double[] newQuantities = new double[newSize];
-        double[] newTotalSoldQty = new double[newSize];
         double[] newTotalRevenue = new double[newSize];
+        int[] newTotalSoldQty = new int[newSize]; // changed to int[]
 
         for (int i = 0; i < productNames.length; i++) {
             newNames[i] = productNames[i];
@@ -469,8 +488,16 @@ public class Supermarket_Program {
         double finalTotal = calculatePromotion(total);
 
         printReceipt(quantities, total, finalTotal);
-        // บันทึกยอดขายและตัดสต็อก
-        for(int i = 0; i < productCount; i++) {
+
+        // Replace inline recording loop with call to recordSale
+        recordSale(quantities);
+
+        System.out.println("==========");
+    }
+
+    // 5) New method: recordSale (paste the previously inline for-loop here)
+    public static void recordSale(int[] quantities) {
+        for (int i = 0; i < productCount; i++) {
             if (quantities[i] > 0) {
                 // ลดสต็อกสินค้า
                 productQuantities[i] -= quantities[i];
@@ -479,31 +506,29 @@ public class Supermarket_Program {
                 productTotalRevenue[i] += (productPrices[i] * quantities[i]); // บันทึกรายได้ (ก่อนหักส่วนลด)
             }
         }
-
-        System.out.println("==========");
     }
 
-    static int[] selectItems(Scanner sc) {
+    public  static int[] selectItems(Scanner sc) {
         int[] quantities = new int[productCount];
 
-        System.out.println("สินค้าในร้าน:");
+        System.out.println("===== Products in store =====");
         for (int i = 0; i < productCount; i++) {
-            System.out.println((i + 1) + ". " + productNames[i] + " - " + productPrices[i] + " บาท");
+            System.out.println((i + 1) + ". " + productNames[i] + " - " + productPrices[i] + " ฿");
         }
 
         while (true) {
-            System.out.print("เลือกสินค้าตามหมายเลข (0 เพื่อจบ): ");
+            System.out.print("Select item by number (0 to finish): ");
             int choice = sc.nextInt();
             if (choice == 0)
                 break;
             if (choice < 1 || choice > productCount) {
-                System.out.println("หมายเลขไม่ถูกต้อง ลองใหม่ครับ");
+                System.out.println("Invalid number. Please try again.");
                 continue;
             }
-            System.out.print("จำนวนที่ต้องการ: ");
+            System.out.print("Enter quantity: ");
             int qty = sc.nextInt();
             if (qty < 0) {
-                System.out.println("จำนวนต้องไม่ติดลบ");
+                System.out.println("Quantity cannot be negative.");
                 continue;
             }
             quantities[choice - 1] += qty;
@@ -512,19 +537,19 @@ public class Supermarket_Program {
         return quantities;
     }
 
-    static double calculateTotal(int[] quantities) {
+    public static double calculateTotal(int[] quantities) {
         double total = 0;
         System.out.println();
-        System.out.println("รายการที่ซื้อ:");
+        System.out.println("===== Items purchased =====");
         for (int i = 0; i < productCount; i++) {
             int qty = quantities[i];
             if (qty > 0) {
                 double subtotal = productPrices[i] * qty;
-                System.out.println(productNames[i] + " x " + qty + " = " + subtotal + " บาท");
+                System.out.println(productNames[i] + " x " + qty + " = " + subtotal + " ฿");
                 total += subtotal;
             }
-        }
-        System.out.println("ราคารวมทั้งหมด: " + total + " บาท");
+        }System.out.println("--------------------------------");
+        System.out.println("Total price: " + total + " ฿ ");
         return total;
     }
 
@@ -571,12 +596,14 @@ public class Supermarket_Program {
         System.out.println("-----------------------------------------------------");
 
         double grandTotalRevenue = 0.0;
-        double grandTotalItems = 0.0;
+        // 3) grandTotalItems should be int
+        int grandTotalItems = 0;
 
         for (int i = 0; i < productCount; i++) {
             // แสดงเฉพาะสินค้าที่เคยขายได้
             if (productTotalSoldQty[i] > 0) {
-                System.out.printf("%-20s | %-10.0f | %-15.2f\n",
+                // 4) change %-10.0f to %-10d for integer qty
+                System.out.printf("%-20s | %-10d | %-15.2f\n",
                         productNames[i],
                         productTotalSoldQty[i],
                         productTotalRevenue[i]);
@@ -587,9 +614,11 @@ public class Supermarket_Program {
         }
 
         System.out.println("-----------------------------------------------------");
-        System.out.printf("%-20s | %-10.0f | %-15.2f\n",
+        System.out.printf("%-20s | %-10d | %-15.2f\n",
                 "GRAND TOTAL", grandTotalItems, grandTotalRevenue);
         System.out.println("==========================");
     }
+
+
 
 }
