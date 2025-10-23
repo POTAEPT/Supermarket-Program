@@ -469,15 +469,14 @@ public class Supermarket_Program {
         double finalTotal = calculatePromotion(total);
 
         printReceipt(quantities, total, finalTotal);
+        // บันทึกยอดขายและตัดสต็อก
         for(int i = 0; i < productCount; i++) {
             if (quantities[i] > 0) {
-
-                // 1. ลดสต็อกสินค้า
+                // ลดสต็อกสินค้า
                 productQuantities[i] -= quantities[i];
-
-                // 2. บันทึกข้อมูลการขาย
+                // บันทึกข้อมูลการขาย
                 productTotalSoldQty[i] += quantities[i];
-                productTotalRevenue[i] += (productPrices[i] * quantities[i]);
+                productTotalRevenue[i] += (productPrices[i] * quantities[i]); // บันทึกรายได้ (ก่อนหักส่วนลด)
             }
         }
 
@@ -564,7 +563,7 @@ public class Supermarket_Program {
     }
 
 
-    // --- นี่คือเมธอดใหม่สำหรับ Sales Report ---
+    //--- Sales Report --- 185
     public static void salesReport() {
         System.out.println("===== Sales Report =====");
         System.out.println("-----------------------------------------------------");
@@ -589,9 +588,7 @@ public class Supermarket_Program {
 
         System.out.println("-----------------------------------------------------");
         System.out.printf("%-20s | %-10.0f | %-15.2f\n",
-                "GRAND TOTAL",
-                grandTotalItems,
-                grandTotalRevenue);
+                "GRAND TOTAL", grandTotalItems, grandTotalRevenue);
         System.out.println("==========================");
     }
 
