@@ -15,6 +15,7 @@ public class Supermarket_Program {
     private static int productCount = 3;
 
     // 2. Main Method
+    //ณัฐวุฒิ 171
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
          addUser("admin","12345","admin");
@@ -26,6 +27,7 @@ public class Supermarket_Program {
     }
 
     // 3. Core System Methods
+    //ณัฐวุฒิ 171 ล๊อดอิน
     public static void loginSystem(Scanner sc) {
         System.out.println("======== Login ========");
         System.out.print("Username: ");
@@ -48,7 +50,7 @@ public class Supermarket_Program {
             System.out.println("!!!Login Failed!!!");
         }
     }
-
+    //ณัฐวุฒิ 171 เช็คว่าลีอดอินถูกต้องไหม
     public static String checkLogin(String[][] users, int userCount, String username, String password) {
         if (username == null || password == null) {
             return "Invalid input.";
@@ -62,6 +64,7 @@ public class Supermarket_Program {
     }
 
     // 4. Menu Methods
+    //ณัฐวุฒิ 171 เมนุAdmin
     public static void adminMenu(Scanner sc) {
         while (true) {
             System.out.println("===== Supermarket Program for Admin =====");
@@ -101,7 +104,7 @@ public class Supermarket_Program {
             }
         }
     }
-
+    //ณัฐวุฒิ 171 Menu cashier
     public static void cashierMenu(Scanner sc) {
         while (true) {
             System.out.println("===== Supermarket Program for Cashier =====");
@@ -131,7 +134,7 @@ public class Supermarket_Program {
             }
         }
     }
-
+    //ณัฐวุฒิ 171 เมนูจัดการ User
     public static void userManagement(Scanner sc) {
         while (true) {
             System.out.println("===== Management User =====");
@@ -171,7 +174,7 @@ public class Supermarket_Program {
             }
         }
     }
-
+    //ณัฐวุฒิ 171
     public static void managementProductMenu(Scanner sc) {
         while (true) {
             System.out.println("===== Products Management =====");
@@ -213,13 +216,14 @@ public class Supermarket_Program {
     }
 
     // 5. User Management Methods
+    //ณัฐวุฒิ 171
     public static void displayUser() {
         System.out.println("===== User List =====");
         for (int i = 0; i < userCount; i++) {
             System.out.println("No " + (i + 1) + " Username :" + user[i][0] + " Role :" + user[i][2]);
         }
     }
-
+    //ณัฐวุฒิ 171
     public static int findIndexUser(String username) {
         for (int i = 0; i < userCount; i++) {
             if (user[i][0].equals(username)) {
@@ -228,7 +232,7 @@ public class Supermarket_Program {
         }
         return -1;
     }
-
+    //ณัฐวุฒิ 171
     public static void deleteUser(Scanner sc) {
         System.out.print("Enter Username to remove : ");
         String username = sc.nextLine();
@@ -249,6 +253,7 @@ public class Supermarket_Program {
         System.out.println("Remove User Successful");
     }
 
+    //ณัฐวุฒิ 171
     public static void updateUser(Scanner sc) {
         System.out.print("Enter Username to Edit : ");
         String username = sc.nextLine();
@@ -316,7 +321,7 @@ public class Supermarket_Program {
             }
         }
     }
-
+    //ณัฐวุฒิ 171
     public static void register(Scanner sc) {
         System.out.print("Enter Username : ");
         String username = sc.nextLine();
@@ -333,7 +338,7 @@ public class Supermarket_Program {
             System.out.println("Failed to add user. Username might already exist or input is invalid.");
         }
     }
-
+    //ณัฐวุฒิ 171
     public static boolean addUser(String username, String password, String role) {
         username = username.trim();
         password = password.trim();
@@ -354,7 +359,7 @@ public class Supermarket_Program {
         userCount++;
         return true;
     }
-
+    //ณัฐวุฒิ 171 ขยายไซส์อาเรย์
     private static void resizeUserArray() {
         if (userCount < user.length) {
             return;
@@ -368,6 +373,7 @@ public class Supermarket_Program {
     }
 
     // 6. Product Management Methods
+    //ณฐกร 167 แสดงสินค้าทั้งหมด
     public static void displayProducts() {
         System.out.println("Product List:");
         System.out.println();
@@ -379,7 +385,7 @@ public class Supermarket_Program {
             System.out.println();
         }
     }
-
+    //ณฐกร 167 เพิ่มสินค้า
    public static void addProduct(Scanner sc) {
         System.out.print("Enter Number of product types to add: ");
         int addCount = sc.nextInt(); 
@@ -409,6 +415,7 @@ public class Supermarket_Program {
         System.out.println("Finished adding " + addCount + " products.");
     }
 
+    //ณฐกร 167 ลบสินค้า
     public static void removeProduct(Scanner sc) {
         System.out.print("Enter the product number to remove: ");
         int index = sc.nextInt();
@@ -431,7 +438,7 @@ public class Supermarket_Program {
         productCount--;
         System.out.println("Remove Product Successful");
     }
-
+    //ณฐกร 167 แก้ไขสินค้า
     public static void updateProduct(Scanner sc) {
         System.out.print("Enter the product number to change: ");
         int index = sc.nextInt();
@@ -451,7 +458,7 @@ public class Supermarket_Program {
 
         System.out.println("Update Product Successful");
     }
-
+    // ณฐกร 167 ขยายอาเรย์สินค้า
     private static void resizeProductArray() {
         if (productCount < productNames.length) {
             return;
@@ -480,6 +487,7 @@ public class Supermarket_Program {
     }
 
     // 7. Sales/Checkout Methods
+    // ณัฐวุฒิ 171 กระบวนการขายเพื่อเตรียมเก็บข้อมูล
     public static void sellProductProcess(Scanner sc) {
         int[] quantities = selectItems(sc);
 
@@ -495,7 +503,7 @@ public class Supermarket_Program {
         System.out.println("==========");
     }
 
-    // 5) New method: recordSale (paste the previously inline for-loop here)
+    // ภานุวัฒน์ 185 บันทึกยอดขาย
     public static void recordSale(int[] quantities) {
         for (int i = 0; i < productCount; i++) {
             if (quantities[i] > 0) {
@@ -507,7 +515,7 @@ public class Supermarket_Program {
             }
         }
     }
-
+    //กรกฤช 159 เลือกสินค้า
     public  static int[] selectItems(Scanner sc) {
         int[] quantities = new int[productCount];
 
@@ -537,6 +545,7 @@ public class Supermarket_Program {
         return quantities;
     }
 
+    //กรกฤช 159 คำนวนการขาย
     public static double calculateTotal(int[] quantities) {
         double total = 0;
         System.out.println();
@@ -552,7 +561,7 @@ public class Supermarket_Program {
         System.out.println("Total price: " + total + " ฿ ");
         return total;
     }
-
+    //เมธาสิทธิ์ 189 คำนวนโปรโมชั่น
     public static double calculatePromotion(double total) {
         double[] totalThreshold = { 1000, 750, 500, 250 };
         double[] totalDiscountPercent = { 0.20, 0.15, 0.10, 0.05 };
@@ -569,7 +578,7 @@ public class Supermarket_Program {
         }
         return total - discount;
     }
-
+    //เมธาสิทธิ์ 189 แสดงใบเสร็จ
     public static void printReceipt(int[] qty, double total, double finalTotal) {
         System.out.println("\n===== Receipt =====");
         System.out.println("Item\tPrice\tQty\tSubtotal");
@@ -589,6 +598,7 @@ public class Supermarket_Program {
 
 
     //--- Sales Report --- 185
+    //ภานุวัฒน์ 185 รายงานยอดขาย
     public static void salesReport() {
         System.out.println("===== Sales Report =====");
         System.out.println("-----------------------------------------------------");
