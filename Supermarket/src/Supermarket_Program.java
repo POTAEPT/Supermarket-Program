@@ -174,7 +174,7 @@ public class Supermarket_Program {
             }
         }
     }
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 เมนูจัดการสินค้า
     public static void managementProductMenu(Scanner sc) {
         while (true) {
             System.out.println("===== Products Management =====");
@@ -216,14 +216,14 @@ public class Supermarket_Program {
     }
 
     // 5. User Management Methods
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 แสดงผู้ใช้งาน
     public static void displayUser() {
         System.out.println("===== User List =====");
         for (int i = 0; i < userCount; i++) {
             System.out.println("No " + (i + 1) + " Username :" + user[i][0] + " Role :" + user[i][2]);
         }
     }
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 ช่วยหาว่าอินเดกของUser
     public static int findIndexUser(String username) {
         for (int i = 0; i < userCount; i++) {
             if (user[i][0].equals(username)) {
@@ -232,7 +232,7 @@ public class Supermarket_Program {
         }
         return -1;
     }
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 ลบผู้ใช้งาน
     public static void deleteUser(Scanner sc) {
         System.out.print("Enter Username to remove : ");
         String username = sc.nextLine();
@@ -253,7 +253,7 @@ public class Supermarket_Program {
         System.out.println("Remove User Successful");
     }
 
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 แก้ไขข้อมูลผู้ใช้งาน
     public static void updateUser(Scanner sc) {
         System.out.print("Enter Username to Edit : ");
         String username = sc.nextLine();
@@ -321,7 +321,7 @@ public class Supermarket_Program {
             }
         }
     }
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 หน้าลงทะเบียน
     public static void register(Scanner sc) {
         System.out.print("Enter Username : ");
         String username = sc.nextLine();
@@ -338,7 +338,7 @@ public class Supermarket_Program {
             System.out.println("Failed to add user. Username might already exist or input is invalid.");
         }
     }
-    //ณัฐวุฒิ 171
+    //ณัฐวุฒิ 171 เพิ่มผู้ใช้งาน
     public static boolean addUser(String username, String password, String role) {
         username = username.trim();
         password = password.trim();
@@ -359,7 +359,7 @@ public class Supermarket_Program {
         userCount++;
         return true;
     }
-    //ณัฐวุฒิ 171 ขยายไซส์อาเรย์
+    //ณัฐวุฒิ 171 ขยายไซส์อาเรย์ของUser
     private static void resizeUserArray() {
         if (userCount < user.length) {
             return;
