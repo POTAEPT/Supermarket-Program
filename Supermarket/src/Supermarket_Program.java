@@ -390,30 +390,46 @@ public class Supermarket_Program {
         System.out.print("Enter Number of product types to add: ");
         int addCount = sc.nextInt(); 
         sc.nextLine(); 
-
+        if (addCount < 0 ){
+            System.out.println("Number cannot be negative.");
+            return;
+        }
         for (int i = 0; i < addCount; i++) {
             System.out.println("--- Adding Product " + (i + 1) + "/" + addCount + " ---");
-            
-          
-            resizeProductArray(); 
 
-            
+
+            resizeProductArray();
+
             System.out.print("Enter new product name: ");
-            productNames[productCount] = sc.nextLine();
-            
+            String newName = sc.nextLine().trim();
+
+            // ตรวจสอบว่ามีสินค้าชื่อนี้อยู่แล้วหรือไม่
+            boolean duplicate = false;
+            for (int j = 0; j < productCount; j++) {
+                if (productNames[j].equalsIgnoreCase(newName)) {
+                    duplicate = true;
+                    break;
+                }
+            }
+            if (duplicate) {
+                System.out.println("Product already exists.");
+                continue; // ข้ามการเพิ่มสินค้าชิ้นนี้
+            }
+
+            productNames[productCount] = newName;
+
             System.out.print("Enter new product price(bath): ");
             productPrices[productCount] = sc.nextDouble();
-            
+
             System.out.print("Enter new product quantity: ");
             productQuantities[productCount] = sc.nextDouble();
-            sc.nextLine(); 
+            sc.nextLine();
 
-         
             productCount++;
             System.out.println("Add Product Successful (" + productNames[productCount - 1] + ")");
         }
-        System.out.println("Finished adding " + addCount + " products.");
-    }
+       System.out.println("Finished adding " + addCount + " products.");
+   }
 
     //ณฐกร 167 ลบสินค้า
     public static void removeProduct(Scanner sc) {
